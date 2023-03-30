@@ -19,7 +19,7 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 
 ``` 
 python -m venv venv # install virtual environment 
-. .\venv\Scripts\activate
+. .\venv\Scripts\activatep
 pip install -r .\requirements.txt
 ```
 ### Queries Used
