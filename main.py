@@ -1,7 +1,7 @@
 import cx_Oracle
 import config
 
-cx_Oracle.init_oracle_client(lib_dir=config.PATH_TO_ORACLE_CLIENT) 
+cx_Oracle.init_oracle_client(lib_dir=config.PATH_TO_ORACLE_CLIENT)
 conn=cx_Oracle.connect(config.CONNECTION_STRING)
 print("Orcale, is connected to ",conn.version, " version of database.")
 
