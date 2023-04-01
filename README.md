@@ -11,6 +11,7 @@ This project will store your data and show it and allow you to do operations on 
 
 
 ### Enable scripting
+When scripting is not enabled in your powershell terminal use this:
 ```
 Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted 
 ```
@@ -18,10 +19,16 @@ Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 ### Dependcies
 
 ``` 
-python -m venv venv # install virtual environment 
-. .\venv\Scripts\activatep
-pip install -r .\requirements.txt
+python -m venv venv # create virtual environment 
+. .\venv\Scripts\activate # activate a virtual environment
+pip install -r .\requirements.txt # install python packages in requirements.txt
 ```
 ### Queries Used
 If you have any Database and you want to recreacte the table structures then look in the `sql` folder.
 No particular order,you can use queries in any order.
+
+# Run code
+
+```
+python main.py
+```
