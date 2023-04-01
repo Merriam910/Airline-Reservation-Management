@@ -1,6 +1,6 @@
 # Oracle database configuration
 PATH_TO_ORACLE_CLIENT = "C:\\oracle\\"
-USERNAME = "hr"
+USERNAME = "Maryam"
 PASSWORD = "12345678@"
 HOST = "localhost"
 PORT = 1521

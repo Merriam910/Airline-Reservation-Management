@@ -1,97 +1,103 @@
 import cx_Oracle
 import config
-
+import sys
+from prettytable import from_db_cursor
 cx_Oracle.init_oracle_client(lib_dir=config.PATH_TO_ORACLE_CLIENT)
-conn=cx_Oracle.connect(config.CONNECTION_STRING)
-print("Orcale, is connected to ",conn.version, " version of database.")
 
-cur=conn.cursor()
+def connect():
+    return cx_Oracle.connect(config.CONNECTION_STRING)
+# print("Orcale, is connected to ",conn.version, " version of database.")
 
-def insert_data(username, last_name):
-    query = f"""INSERT INTO STUDENT_DETAILS(FIRST_NAME,LASTNAME) values('{username}','{last_name}')"""
-    cur.execute(query)
-    conn.commit()
 
-def show_data():
-    query = "select * from STUDENT_DETAILS"
-    cur.execute(query)
-    if not cur:
-        print("No records found")
+
+def create_flight():
+    columns = ["FLIGHT_ID", "AIRLINE_ID", "AIRLINE_NAME", "TO_LOCATION", "LOCAL_SEATS"]
+    values = []
+    for column in columns:
+        value = input(f"Enter your {column}: ")
+        if value ==  "LOCAL_SEATS":
+            value = int(value)
+        values.append(value)
+
+    columns_to_insert = ",".join(columns)
+    
+    with connect() as conn:
+        cur=conn.cursor()
+        query = f"""INSERT INTO FLIGHT({columns_to_insert}) values{tuple(values)}""" 
+        cur.execute(query)
+        conn.commit()
+    print(f"Flight created!")
+
+def get_all_flights():
+    """Returns all flights as a list"""
+    with connect() as conn:
+        query = "SELECT * FROM FLIGHT"
+        cur=conn.cursor()
+        cur.execute(query)
+        flights_table = from_db_cursor(cur)
+        print(flights_table)
+
+def delete_flight():
+    flight_id=input('Enter the flight id you want to delete: ')
+    if flight_id.strip() == '':
+        print("Please give an valid flight_id!")
         return
-    for idx, row in enumerate(cur):
-        first_name = row[0]
-        last_name = row[1]
-        print(f"{idx}| {first_name} {last_name}")
+    with connect() as conn:
+        cur=conn.cursor()
+        query = f"DELETE FROM FLIGHT WHERE flight_id= '{flight_id}'"
+        cur.execute(query)
+        conn.commit()
+    print(f"Deleted flight {flight_id}!")
+    
+def update_flight():
+    flight_id=input('Enter the flight id you want to update: ')
+    if flight_id.strip() == '':
+        print("Please give an valid flight_id!")
+        return
+    columns=("AIRLINE_ID", "AIRLINE_NAME", "TO_LOCATION", "LOCAL_SEATS")
+    updates = []
+    for column in columns:
+        value = input(f'The new value for {column}. Leave empty to skip: ')
+        if not value.strip() == '':
+            updates.append(f"{column} = '{value}'")
 
-def delete_user(user_id):
-    query = f"delete from STUDENT_DETAILS where LASTNAME= '{user_id}'"
-    cur.execute(query)
-    conn.commit()
+    if not updates:
+        print("Nothing to add")
+        return
 
-print("""
-Welcome to the Airline Database Management system 
-Options:
-- 1 | insert data
-- 2 | display data
-- 3 | delete data
-- 4 | update data
-- 5 | search data
-""")
+    update_string = (',').join(updates)
 
-while True:
+    with connect() as conn:
+        cur=conn.cursor()
+        query = f"UPDATE FLIGHT SET {update_string} WHERE flight_id= '{flight_id}'"
+        print(query)
+        cur.execute(query)
+        conn.commit()
+    print(f"Deleted flight {flight_id}!")
 
-    try:
-        choice = int(input('Enter the choice '))
+def main():
+    OPTIONS = {
+        "1": {"logic": create_flight , "description": "1 |\tCreate a new flight"},
+        "2": {"logic": get_all_flights , "description": "2 |\tShow all flights"},
+        "3": {"logic": delete_flight , "description": "3 |\tRemove a flight"},
+        "4": {"logic": update_flight , "description": "4 |\tUpdate a flight"},
+        "5": {"logic": sys.exit, "description": "5 |\tClose the application"}
+    }
 
-        if choice == 1:
-            # insert
-            username = input('Enter your name: ')
-            last_name = input('Enter your last name: ')
-            insert_data(username=username, last_name=last_name)
-            print(f"data to database!")
+    while True:
+        for key, value in OPTIONS.items():
+            print(value['description'])
 
-        elif choice == 2:
-            show_data()
+        
+        choice = input('Enter the choice: ')
+        if choice in OPTIONS:
+            OPTIONS[choice]['logic']()
+            continue
 
-        elif choice == 3:
-            # delete the data
-            delete_RecordId=input('Enter the record id you want to delete: ')
-            delete_user(user_id=delete_RecordId)
+        print("Please select an valid option")
 
-        elif choice == 4:
-            # update
-            pass
-        elif choice == 5:
-            # search
-            status='false'
-            search_RecordId = input('Enter the record id you want to search.')
-            query = "select LAST_NAME from STUDENT_DETAILS"
-            cur.execute(query)
-            for row in cur:
-                if search_RecordId==row[0]:
-                    status='true'
-            print('---------------------------')
-            if status=='true':
-                query = "select * from STUDENT_DETAILS where LAST_NAME= '{}'".format(
-                    search_RecordId)
-                cur.execute(query)
-                postion = 1
-                for row in cur:
-                    print('Record no.', postion)
-                    srno = 1
-                    print('|', srno, "FIRST_NAME : ", row[0], '|')
-                    print('|', srno + 1, "LAST_NAME  : ", row[1], '|')
-                    postion = postion + 1
-                    # print('***************************')
-                print('---------------------------')
-                input()
-            else:
-                print('No, record found for', search_RecordId)
-                print('---------------------------')
-                input()
-        else:
-            print('invalid input! try again.')
-            print()
-    except Exception as e:
-        print(e)
-        print('invalid data')
+
+if __name__ == "__main__":
+    main()
+
+
