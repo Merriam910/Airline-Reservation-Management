@@ -29,7 +29,7 @@ def delete_user(user_id):
     conn.commit()
 
 print("""
-Welcome to the Airline Database Manager
+Welcome to the Airline Database Management system 
 Options:
 - 1 | insert data
 - 2 | display data
