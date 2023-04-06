@@ -1,5 +1,5 @@
 # Airline Reservation Management
-This project will store your data and show it and allow you to do operations on it i-e insertion,deletion,updation and search,It will also display stored data in Databases and Provide access to it.
+This project will store your data and show it and allow you to do operations on it i-e insertion,deletion,updation and exit,It will also display stored data in Databases and Provide access to it.
 
 ## Installation
 ## Software Required

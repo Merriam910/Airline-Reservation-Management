@@ -11,7 +11,7 @@ def connect():
 def create_flight():
     columns_list = ["FLIGHT_ID", "AIRLINE_ID", "AIRLINE_NAME", "TO_LOCATION", "LOCAL_SEATS"]
     values = []
-    number_columns = ["LOCAL_SEATS"]
+    number_columns = ["LOCAL_SEATS"]  
     for column in columns_list:
         value = input(f"Enter your {column}: ")
         if value in number_columns: # if LOCAL_SEATS in ["LOCAL_SEATS"] , gives true
