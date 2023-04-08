@@ -7,5 +7,10 @@ from_location varchar2(55) NOT NULL,
 to_location varchar2(55), 
 local_seats number(10),
 CONSTRAINT flight_pk PRIMARY KEY (flight_ID)
-CONSTRAINT CHK_seats CHECK (local_seats>=0)
+CONSTRAINT CHK_seats CHECK (local_seats>=0 AND local_seats<2300)
 );
+#CHECKS
+ALTER TABLE PASSENGER_PROFILE
+add CONSTRAINT chk_FIRST_NAME CHECK(FIRST_NAME not like '[0-9]')
+ALTER TABLE PASSENGER_PROFILE
+add CONSTRAINT chek_FIRST_NAME CHECK(FIRST_NAME  not like '%[!@#%^&*_+-]%')
