@@ -1,5 +1,4 @@
 cx-Oracle==8.3.0
 prettytable==3.6.0
 rich==13.3.1
-import login
-from tkinter import *
+tkinter==3.11.3
