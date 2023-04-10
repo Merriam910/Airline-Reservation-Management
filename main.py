@@ -4,6 +4,7 @@ import sys
 import login
 from prettytable import from_db_cursor
 from tkinter import *
+
 cx_Oracle.init_oracle_client(lib_dir=config.PATH_TO_ORACLE_CLIENT)
 
 def connect():
@@ -27,7 +28,7 @@ def create_flight():
         query = f"""INSERT INTO FLIGHT({columns_to_insert}) values{tuple(values)}"""  # tuples(values) means casting our values(which is list) to tuples. [1,2,3] -> (1,2,3)
         cur.execute(query)
         conn.commit()
-    print(f"Flight created!")
+    print(f"Flight created!",style="cong")
 
 def get_all_flights():
     with connect() as conn:
