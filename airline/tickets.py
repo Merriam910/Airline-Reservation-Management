@@ -34,8 +34,15 @@ def delete_tickets():
         cur=conn.cursor()
         query = f"DELETE FROM TICKET_INFO WHERE ticket_id= '{ticket_id}'"
         cur.execute(query)
+        num_rows_deleted = cur.rowcount #checks how many rows are effected
         conn.commit()
-    print(f"Deleted ticket {ticket_id}!") 
+
+        if num_rows_deleted > 0:
+            print(f"Deleted Ticket {ticket_id}")
+        
+        print("NO SUCH DATA FOUND")
+        return 
+    
 def update_tickets():
     ticket_id=input('Enter the ticket id you want to update: ')
     if ticket_id.strip() == '':

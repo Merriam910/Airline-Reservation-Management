@@ -34,8 +34,16 @@ def delete_passenger():
         cur=conn.cursor()
         query = f"DELETE FROM PASSENGER_PROFILE WHERE profile_id= '{profile_id}'"
         cur.execute(query)
+        num_rows_deleted = cur.rowcount #checks how many rows are effected
         conn.commit()
-    print(f"Deleted profile {profile_id}!")  
+
+        if num_rows_deleted > 0:
+            print(f"Deleted profile {profile_id}")
+        
+        print("NO SUCH DATA FOUND")
+        return 
+    
+     
 def update_passenger():
     profile_id=input('Enter the profile id you want to update: ')
     if profile_id.strip() == '':

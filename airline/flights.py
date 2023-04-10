@@ -37,8 +37,14 @@ def delete_flight():
         cur=conn.cursor()
         query = f"DELETE FROM FLIGHT WHERE flight_id= '{flight_id}'"
         cur.execute(query)
+        num_rows_deleted = cur.rowcount #checks how many rows are effected
         conn.commit()
-    print(f"Deleted flight {flight_id}!")
+
+        if num_rows_deleted > 0:
+            print(f"Deleted flight {flight_id}")
+        
+        print("NO SUCH DATA FOUND")
+        return 
     
 def update_flight():
     flight_id=input('Enter the flight id you want to update: ')
@@ -62,5 +68,12 @@ def update_flight():
         cur=conn.cursor()
         query = f"UPDATE FLIGHT SET {update_string} WHERE flight_id= '{flight_id}'" # update the record for the condition (WHERE) in this case flight_id="xxx" 
         cur.execute(query)
+        num_rows_updated = cur.rowcount #checks how many rows are effected
         conn.commit()
-    print(f"Updated flight {flight_id}!")
+
+        if num_rows_updated > 0:
+            print(f"UPDATED flight {flight_id}")
+        
+        print("NO SUCH DATA FOUND")
+        return 
+        
