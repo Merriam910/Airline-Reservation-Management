@@ -62,9 +62,16 @@ def update_passenger():
 
     update_string = (',').join(updates) # ["AIRLINE_ID= '1'",  "TO_LOCATION= 'A'"] --> "AIRLINE_ID= '1',TO_LOCATION= 'A'"  
 
+
     with connect() as conn:
         cur=conn.cursor()
         query = f"UPDATE PASSENGER_PROFILE SET {update_string} WHERE profile_id= '{profile_id}'" # update the record for the condition (WHERE) in this case flight_id="xxx" 
         cur.execute(query)
+        num_rows_updated = cur.rowcount #checks how many rows are effected
         conn.commit()
-    print(f"Updated passenger {profile_id}!")  
+
+        if num_rows_updated > 0:
+            print(f"UPDATED Passenger {profile_id}")
+            return  
+        print("NO SUCH DATA FOUND")
+        return 

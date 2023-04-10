@@ -61,9 +61,16 @@ def update_tickets():
 
     update_string = (',').join(updates) # ["AIRLINE_ID= '1'",  "TO_LOCATION= 'A'"] --> "AIRLINE_ID= '1',TO_LOCATION= 'A'"  
 
+
     with connect() as conn:
         cur=conn.cursor()
-        query = f"UPDATE TICKET_INFO SET {update_string} WHERE ticket_id= '{ticket_id}'" # update the record for the condition (WHERE) in this case flight_id="xxx" 
+        query = f"UPDATE TICKETS_INFO SET {update_string} WHERE ticket_id= '{ticket_id}'" # update the record for the condition (WHERE) in this case flight_id="xxx" 
         cur.execute(query)
+        num_rows_updated = cur.rowcount #checks how many rows are effected
         conn.commit()
-    print(f"Updated Ticket {ticket_id}!") 
+
+        if num_rows_updated > 0:
+            print(f"UPDATED TICKET {ticket_id}")
+            return  
+        print("NO SUCH DATA FOUND")
+        return 

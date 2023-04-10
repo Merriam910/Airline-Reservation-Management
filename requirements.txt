@@ -2,3 +2,4 @@ cx-Oracle==8.3.0
 prettytable==3.6.0
 rich==13.3.1
 tkinter==3.11.3
+SQLAlchemy==2.0.9

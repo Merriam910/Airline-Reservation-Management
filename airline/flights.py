@@ -73,7 +73,8 @@ def update_flight():
 
         if num_rows_updated > 0:
             print(f"UPDATED flight {flight_id}")
-        
+            return
         print("NO SUCH DATA FOUND")
         return 
         
+    
