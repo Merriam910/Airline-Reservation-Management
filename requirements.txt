@@ -1,5 +1,7 @@
 cx-Oracle==8.3.0
 prettytable==3.6.0
 rich==13.3.1
-tkinter==3.11.3
+
 SQLAlchemy==2.0.9
+fastapi==0.95.0
+uvicorn==0.21.1
