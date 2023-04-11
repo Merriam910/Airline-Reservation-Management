@@ -10,7 +10,7 @@ def connect():
     return cx_Oracle.connect(config.CONNECTION_STRING)
 
 def ticket_menu():
-     print("\n   ----AIRLINE RESERVATION MANAGEMENT SYSTEM----\n")
+     print("\033[92m\033[1m\033[4m\n   ----AIRLINE RESERVATION MANAGEMENT SYSTEM----\n")
      OPTIONS={
          "1": {
           "logic": tickets.create_ticket , "description": "1 |\tCreate a new ticket"},
@@ -31,7 +31,7 @@ def ticket_menu():
 
         print("Please select an valid option")
 def passenger_menu():
-     print("\n   ----AIRLINE RESERVATION MANAGEMENT SYSTEM----\n")
+     print("\033[96m\033[1m\033[4m\n   ----AIRLINE RESERVATION MANAGEMENT SYSTEM----\n")
      OPTIONS={ "1": {"logic": passengers.create_passenger , "description": "1 |\tCreate a new passenger"},
         "2": {"logic": passengers.get_all_passengers , "description": "2 |\tShow all passengers"},
         "3": {"logic": passengers.delete_passenger , "description": "3 |\tRemove a passenger"},
@@ -50,7 +50,7 @@ def passenger_menu():
 
         print("Please select an valid option")
 def main():
-    print("\n   ----AIRLINE RESERVATION MANAGEMENT SYSTEM----\n")
+    print("\033[95m\033[1m\033[4m\n   ----AIRLINE RESERVATION MANAGEMENT SYSTEM----\n")
 
     OPTIONS = {
         "1": {"logic": flights.create_flight , "description": "1 |\tCreate a new flight"},
