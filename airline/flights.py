@@ -17,7 +17,7 @@ def create_flight():
         query = f"""INSERT INTO FLIGHT({columns_to_insert}) values{tuple(values)}"""  # tuples(values) means casting our values(which is list) to tuples. [1,2,3] -> (1,2,3)
         cur.execute(query)
         conn.commit()
-    print(f"Flight created!",style="cong")
+    print(f"Flight created!")
 
 def get_all_flights():
     with connect() as conn:
