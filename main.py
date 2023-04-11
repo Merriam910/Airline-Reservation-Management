@@ -25,9 +25,9 @@ def ticket_menu():
             print(value['description'])
 
         
-        choice_P = input('Enter the choice: ')
-        if choice_P in OPTIONS:
-            OPTIONS[choice_P]['logic']()
+        choice_t = input('Enter the choice: ')
+        if choice_t in OPTIONS:
+            OPTIONS[choice_t]['logic']()
             continue
 
         print("Please select an valid option")

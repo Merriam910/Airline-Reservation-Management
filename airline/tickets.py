@@ -48,29 +48,30 @@ def update_tickets():
     if ticket_id.strip() == '':
         print("Please give an valid ticket_id!")
         return
-    columns=("TICKET_ID","FLIGHT_ID","PROFILE_ID", "STATUS")
+    columns=("FLIGHT_ID", "PROFILE_ID", "STATUS")
     updates = []
     for column in columns:
         value = input(f'The new value for {column}. Leave empty to skip: ')
         if not value.strip() == '':
-            updates.append(f"{column} = '{value}'")  # AIRLINE_ID= '1' --> adds to list ["AIRLINE_ID= '1'",  "TO_LOCATION= 'A'"]
+            updates.append(f"{column} = '{value}'")  
 
     if not updates: # when there is nothing to the list stop with this function and return nothing
         print("Nothing to add")
         return
 
-    update_string = (',').join(updates) # ["AIRLINE_ID= '1'",  "TO_LOCATION= 'A'"] --> "AIRLINE_ID= '1',TO_LOCATION= 'A'"  
-
+    update_string = (',').join(updates)
 
     with connect() as conn:
         cur=conn.cursor()
-        query = f"UPDATE TICKETS_INFO SET {update_string} WHERE ticket_id= '{ticket_id}'" # update the record for the condition (WHERE) in this case flight_id="xxx" 
+        query = f"UPDATE TICKET_INFO SET {update_string} WHERE ticket_id= '{ticket_id}'" # update the record for the condition (WHERE) in this case flight_id="xxx" 
         cur.execute(query)
         num_rows_updated = cur.rowcount #checks how many rows are effected
         conn.commit()
 
         if num_rows_updated > 0:
-            print(f"UPDATED TICKET {ticket_id}")
-            return  
+            print(f"UPDATED ticket {ticket_id}")
+            return
         print("NO SUCH DATA FOUND")
         return 
+        
+    
