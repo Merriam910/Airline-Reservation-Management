@@ -39,7 +39,7 @@ def delete_tickets():
 
         if num_rows_deleted > 0:
             print(f"Deleted Ticket {ticket_id}")
-        
+            return
         print("NO SUCH DATA FOUND")
         return 
     

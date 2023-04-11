@@ -39,7 +39,7 @@ def delete_passenger():
 
         if num_rows_deleted > 0:
             print(f"Deleted profile {profile_id}")
-        
+            return
         print("NO SUCH DATA FOUND")
         return 
     

@@ -41,8 +41,8 @@ def delete_flight():
         conn.commit()
 
         if num_rows_deleted > 0:
-            print(f"Deleted flight {flight_id}")
-        
+            print(f"REMOVED flight {flight_id}")
+            return
         print("NO SUCH DATA FOUND")
         return 
     
