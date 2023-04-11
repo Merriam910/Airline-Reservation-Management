@@ -21,7 +21,7 @@ def submit_login():
 login_window = tk.Tk()
 login_window.title("Login Page")
 login_window.geometry("500x300")
-login_window.config(bg="black")
+login_window.config(bg="dark green")
 
 # Create the username entry field
 username_label = tk.Label(login_window, text="Username:", font=("Arial", 12), bg="grey")
