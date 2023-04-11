@@ -1,24 +1,47 @@
-from tkinter import * #allows usage of facilities of tkinter
-root=Tk() #creates an instance of the window
-root.title("Login")
-root.geometry('500x300')
-root.configure(height=400,width=400,background='#509099')
-def getvals():
-    print("Accepted")
-#HEADING
-Label(text="User Login",font="arial 15 bold", bg='#509099').grid(row=0,column=2)
-#FIELDNAMES and PACKING FIELDS
-name=Label(root,text="username", bg='#509099').grid(row=1,column=2)
-password=Label(root,text="password" ,bg='#509099').grid(row=2,column=2)
-#VARIABLES FOR STORING DATA
-namevalue=StringVar
-passwordvalue=IntVar
-checkvalue=IntVar        #will be either one or zero
-#Creating entry fields and packing them
-nameentry=Entry(root, textvariable=namevalue).grid(row=1,column=3)#Entry value wil always be in our root file
-passwordentry=Entry(root,textvariable=passwordvalue).grid(row=2,column=3)
-#Creating checkbox and packing(grid)
-chckbtn=Checkbutton(text="Remember me?",bg='#509099',variable=checkvalue).grid(row=5,column=3)
-#Creating submit button and packing
-Button(text="submit", command=getvals).grid(row=6,column=3)
-root.mainloop()
+import tkinter as tk
+
+def submit_login():
+    # Get the values entered by the user
+    username = username_entry.get()
+    password = password_entry.get()
+
+    # Check if the username and password fields are empty or contain white space
+    if not username.strip() or not password.strip():
+        message_label.config(text="Please enter a valid username and password")
+        return
+
+    # Check if the username and password are correct
+    if username == "Maryam" and password == "12345678":
+        message_label.config(text="Login successful!")
+        login_window.destroy()
+    else:
+        message_label.config(text="Incorrect username or password")
+
+# Create the main window
+login_window = tk.Tk()
+login_window.title("Login Page")
+login_window.geometry("500x300")
+login_window.config(bg="black")
+
+# Create the username entry field
+username_label = tk.Label(login_window, text="Username:", font=("Arial", 12), bg="grey")
+username_label.pack(pady=10)
+username_entry = tk.Entry(login_window, font=("Arial", 12))
+username_entry.pack()
+
+# Create the password entry field
+password_label = tk.Label(login_window, text="Password:", font=("Arial", 12), bg="grey")
+password_label.pack(pady=10)
+password_entry = tk.Entry(login_window, font=("Arial", 12), show="*")
+password_entry.pack()
+
+# Create the submit button
+submit_button = tk.Button(login_window, text="Submit", font=("Arial", 12), bg="white", command=submit_login)
+submit_button.pack(pady=10)
+
+# Create the message label
+message_label = tk.Label(login_window, font=("Arial", 12), bg="grey")
+message_label.pack(pady=10)
+
+# Run the main loop
+login_window.mainloop()
