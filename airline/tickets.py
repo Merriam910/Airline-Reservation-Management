@@ -48,7 +48,7 @@ def update_tickets():
     if ticket_id.strip() == '':
         print("Please give an valid ticket_id!")
         return
-    columns=("FLIGHT_ID", "PROFILE_ID", "STATUS")
+    columns=("TICKET_ID","STATUS")
     updates = []
     for column in columns:
         value = input(f'The new value for {column}. Leave empty to skip: ')

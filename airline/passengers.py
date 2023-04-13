@@ -49,7 +49,7 @@ def update_passenger():
     if profile_id.strip() == '':
         print("Please give an valid profile_id!")
         return
-    columns=("PASSWORD", "FIRST_NAME", "EMAIL_ADDRESS")
+    columns=("PROFILE_ID","PASSWORD", "FIRST_NAME", "EMAIL_ADDRESS")
     updates = []
     for column in columns:
         value = input(f'The new value for {column}. Leave empty to skip: ')
